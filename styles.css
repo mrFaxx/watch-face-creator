@@ -775,3 +775,69 @@ body {
         width: 220px;
     }
 }
+
+/* Tooltips para las flechas */
+.arrow::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 8px 12px;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #00ff00;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    font-family: 'Consolas', 'Monaco', monospace;
+    z-index: 1000;
+    border: 1px solid #333;
+}
+
+/* Hint para los puntitos */
+.dots-hint {
+    position: absolute;
+    bottom: 150%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #00ff00;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    font-family: 'Consolas', 'Monaco', monospace;
+    z-index: 1000;
+    border: 1px solid #333;
+}
+
+/* Mostrar tooltips al hacer hover */
+.arrow:hover::before {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Mostrar hint de los puntitos */
+.dots-hint.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Animación para el hint de los puntitos */
+@keyframes showHint {
+    0% { opacity: 0; visibility: hidden; }
+    20% { opacity: 1; visibility: visible; }
+    80% { opacity: 1; visibility: visible; }
+    100% { opacity: 0; visibility: hidden; }
+}
+
+.dots-hint.animate {
+    animation: showHint 4s ease-in-out;
+}

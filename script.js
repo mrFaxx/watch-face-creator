@@ -2,6 +2,7 @@
 let resizeTimeout = null;
 let vehiculoTimeouts = [];
 
+
 // Estado global de la aplicación
 const state = {
     currentInterface: 'dope',
@@ -403,38 +404,48 @@ document.addEventListener('DOMContentLoaded', async () => {
     initializeElements();
     
     try {
-        // Establecer imagen base inicial
-        if (elements.watchBase) {
-            elements.watchBase.src = CONFIG.interfaces.dope.watchBase;
-        }
+        // Inicializar imágenes y elementos base
+        await initializeImages();
         
-        // Detectar imágenes disponibles
-        console.log('Detectando imágenes disponibles...');
-        hustlers = await detectarImagenesDisponibles('hustler', 'hustler');
-        vehiculos = await detectarImagenesDisponibles('vehiculo', 'vehiculo');
-        ryoBaseImages = await detectarImagenesDisponibles('ryo', 'img_base_');
-        starsImages = await detectarImagenesDisponibles('ryo', 'stars_');
+        // Inicializar UI y actualizaciones
+        initializeUI();
         
-        console.log('Imágenes detectadas:', {
-            hustlers,
-            vehiculos,
-            ryoBaseImages,
-            starsImages
-        });
-        
-        // Establecer imágenes iniciales
-        if (hustlers.length > 0 && elements.hustler) {
-            elements.hustler.src = CONFIG.imagePath.dope + hustlers[0];
-        }
-        
-        if (vehiculos.length > 0 && elements.vehiculo) {
-            elements.vehiculo.src = CONFIG.imagePath.dope + vehiculos[0];
-        }
+        // Inicializar hints y tooltips
+        initializeHints();
         
     } catch (error) {
         console.error('Error durante la inicialización:', error);
     }
+});
+
+// Función para inicializar imágenes
+async function initializeImages() {
+    // Establecer imagen base inicial
+    if (elements.watchBase) {
+        elements.watchBase.src = CONFIG.interfaces.dope.watchBase;
+    }
     
+    // Detectar imágenes disponibles
+    console.log('Detectando imágenes disponibles...');
+    hustlers = await detectarImagenesDisponibles('hustler', 'hustler');
+    vehiculos = await detectarImagenesDisponibles('vehiculo', 'vehiculo');
+    ryoBaseImages = await detectarImagenesDisponibles('ryo', 'img_base_');
+    starsImages = await detectarImagenesDisponibles('ryo', 'stars_');
+    
+    console.log('Imágenes detectadas:', { hustlers, vehiculos, ryoBaseImages, starsImages });
+    
+    // Establecer imágenes iniciales
+    if (hustlers.length > 0 && elements.hustler) {
+        elements.hustler.src = CONFIG.imagePath.dope + hustlers[0];
+    }
+    
+    if (vehiculos.length > 0 && elements.vehiculo) {
+        elements.vehiculo.src = CONFIG.imagePath.dope + vehiculos[0];
+    }
+}
+
+// Función para inicializar UI
+function initializeUI() {
     // Inicializar dimensiones y reloj
     updateDimensions();
     updateClock();
@@ -442,5 +453,26 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     // Asegurarnos de que el body tenga el data-interface correcto al cargar
     document.body.setAttribute('data-interface', state.currentInterface);
-});
+}
 
+// Función para inicializar hints
+function initializeHints() {
+    const dotsContainer = document.querySelector('.interface-dots');
+    const hint = document.createElement('div');
+    hint.className = 'dots-hint';
+    hint.textContent = 'Switch between interfaces!';
+    dotsContainer.appendChild(hint);
+
+    function showDotsHint() {
+        hint.style.animation = 'showHint 4s ease-in-out';
+        hint.addEventListener('animationend', () => {
+            hint.style.animation = '';
+        }, { once: true });
+    }
+
+    // Mostrar el hint inicial después de 2 segundos
+    setTimeout(showDotsHint, 2000);
+    
+    // Repetir cada 30 segundos
+    setInterval(showDotsHint, 30000);
+}
