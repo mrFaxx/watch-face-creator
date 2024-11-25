@@ -1,0 +1,777 @@
+/* Declaración de las fuentes */
+@font-face {
+    font-family: 'Dope Display';
+    src: url('./fonts/Dope-Display.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Dope-Regular';
+    src: url('./fonts/Dope-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Perfect DOS VGA 437';
+    src: url('../fonts/Perfect-DOS-VGA-437.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PPMondwest';
+    src: url('./fonts/PPMondwest-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Reset y estilos base */
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100vh;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #101010;
+    color: #ffffff;
+}
+
+/* Layout principal */
+.main-container {
+    display: grid;
+    grid-template-columns: 1fr 678px 1fr;
+    gap: 0;
+    align-items: center;
+    justify-content: center;
+    max-width: 1440px;
+    width: 100%;
+    height: 100vh;
+    margin: 0 auto;
+    position: relative;
+    padding: 1rem;
+}
+
+/* Título */
+.title-container {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 32px;
+}
+
+.title {
+    font-family: 'Dope-Regular', sans-serif;
+    font-size: 4rem;
+    text-align: right;
+    line-height: 1;
+    white-space: pre-line;
+    margin: 0;
+}
+
+/* Contenedor central */
+.center-container {
+    width: 678px;
+    position: relative;
+    grid-column: 2;
+    margin: 0 auto;
+    padding-top: 20px;
+    gap: 15px;
+}
+
+/* Watch wrapper para mantener ratio */
+.watch-wrapper {
+    position: relative;
+    width: 500px;
+    height: 609px;
+    margin: 0 auto;
+}
+
+/* Watch base (fuera del wrapper) */
+.watch-base {
+    position: absolute;
+    width: 678px;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+}
+
+/* Contenedor de la imagen */
+.container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Imagen base */
+.imagen-base {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 500px;
+    height: 609px;
+    z-index: 1;
+}
+
+/* Controles */
+.controls-container {
+    position: relative;
+    z-index: 20;
+    padding-left: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.selector-groups {
+    position: relative;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.selector-group {
+    position: relative;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.selector-group span {
+    font-family: 'Dope Display', monospace;
+    font-size: 20px;
+}
+
+/* Botones de flecha */
+.arrow {
+    position: relative;
+    z-index: 20;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 28px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    transition: opacity 0.2s ease;
+}
+
+.arrow:hover {
+    opacity: 0.8;
+}
+
+/* Estilos base del botón de descarga */
+.download-button {
+    position: relative;
+    z-index: 20;
+    margin-top: 3rem;
+    padding: 1rem 2rem;
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 6px;
+    font-family: 'Dope Display', monospace;
+    font-size: 16px;
+    cursor: pointer;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+    width: 220px;
+}
+
+.download-button:hover {
+    background-color: #e0e0e0;
+}
+
+.download-button:disabled {
+    opacity: 0.8;
+    cursor: not-allowed;
+}
+
+/* Estilos específicos para cada interfaz */
+[data-interface="dope"] .download-button {
+    width: 220px;
+}
+
+[data-interface="ryo"] .download-button {
+    width: 200px;
+    font-family: 'Perfect DOS VGA 437', monospace;
+    font-size: 25px;
+    background-color: #2AF780;
+    color: #192118;
+}
+
+/* Elementos específicos */
+.hustler, .vehiculo, .stars {
+    position: absolute;
+    image-rendering: pixelated;
+    transition: transform 0.3s ease;
+}
+
+.hustler {
+    width: 210px;
+    left: 7px;
+    top: 101px;
+    z-index: 3;
+}
+
+.vehiculo {
+    width: 448px;
+    left: 52px;
+    top: -10px;
+    z-index: 2;
+}
+
+/* Reloj */
+.clock {
+    position: absolute;
+    bottom: 8%;
+    width: 100%;
+    text-align: center;
+    font-family: 'Dope-Regular', monospace;
+    font-size: 160px;
+    color: #4E4E4E;
+    z-index: 2;
+}
+
+/* Navegación de interfaces */
+.interface-dots {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 16px;
+    z-index: 20;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.dot:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.dot.active {
+    background-color: white;
+    transform: scale(1.2);
+}
+
+/* Media queries */
+@media (max-width: 1200px) {
+    .main-container {
+        grid-template-columns: 1fr 500px 1fr;
+    }
+    
+    .title {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 992px) {
+    body {
+        overflow-y: auto;
+        min-height: 100vh;
+    }
+    
+    .main-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        height: auto;
+        min-height: 100vh;
+        padding: 2rem 1rem;
+        gap: 0;
+        padding-top: 4rem;
+    }
+    
+    .title-container {
+        padding: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+    
+    .title {
+        text-align: center;
+        font-size: 2rem;
+        white-space: nowrap;
+    }
+    
+    .center-container {
+        width: 100%;
+        max-width: 500px;
+        order: 2;
+        margin-bottom: -2rem;
+    }
+    
+    .watch-wrapper {
+        transform: scale(0.8);
+        margin: 0 auto;
+    }
+    
+    .controls-container {
+        width: 100%;
+        max-width: 500px;
+        padding: 0;
+        align-items: center;
+        order: 3;
+    }
+    
+    .selector-groups {
+        width: 100%;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .selector-group {
+        width: 200px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .selector-group span {
+        font-size: 18px;
+        min-width: 80px;
+        text-align: center;
+        flex: 1;
+        text-align: left;
+    }
+    
+    .download-button {
+        margin-top: 1rem;
+    }
+    
+    .interface-dots {
+        bottom: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .main-container {
+        padding: 1rem 0.5rem;
+        padding-top: 3rem;
+    }
+    
+    .watch-wrapper {
+        transform: scale(0.6);
+    }
+    
+    .title {
+        font-size: 1.5rem;
+    }
+    
+    .selector-group span {
+        font-size: 16px;
+    }
+    
+    .download-button {
+        font-size: 14px;
+    }
+    
+    .selector-groups {
+        gap: 0.8rem;
+    }
+}
+
+/* Estilos específicos para RYO */
+[data-interface="ryo"] .title {
+    font-family: 'PPMondwest', sans-serif;
+    color: #2AF780;
+    font-weight: normal;
+}
+
+[data-interface="ryo"] .selector-group span {
+    font-family: 'Perfect DOS VGA 437', monospace !important;
+    color: #2AF780;
+    font-size: 30px;
+    text-transform: uppercase;
+    font-weight: normal !important;
+    flex: 1;
+    text-align: center;
+    margin: 0 10px;
+}
+
+[data-interface="ryo"] .download-button {
+    font-family: 'Perfect DOS VGA 437', monospace !important;
+    font-size: 25px;
+    font-weight: normal !important;
+    background-color: #2AF780;
+    color: #192118;
+    text-transform: uppercase;
+    width: 200px;
+}
+
+[data-interface="ryo"] .download-button:hover {
+    background-color: #22c66a;
+}
+
+[data-interface="ryo"] .clock {
+    color: #2AF780;
+}
+
+/* Animaciones */
+.changing {
+    animation: fade 0.3s ease-in-out;
+}
+
+.sliding-out {
+    animation: slideOut 0.4s ease-in-out forwards;
+}
+
+.sliding-in {
+    animation: slideIn 0.4s ease-in-out forwards;
+}
+
+@keyframes fade {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes slideOut {
+    0% { transform: translateX(0); opacity: 1; }
+    100% { transform: translateX(-100%); opacity: 0; }
+}
+
+@keyframes slideIn {
+    0% { transform: translateX(100%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+}
+
+.sliding-out-left {
+    animation: slideOutLeft 0.4s ease-in-out forwards;
+}
+
+.sliding-out-right {
+    animation: slideOutRight 0.4s ease-in-out forwards;
+}
+
+.sliding-in-left {
+    animation: slideInLeft 0.4s ease-in-out forwards;
+}
+
+.sliding-in-right {
+    animation: slideInRight 0.4s ease-in-out forwards;
+}
+
+@keyframes slideOutLeft {
+    0% { transform: translateX(0); opacity: 1; }
+    100% { transform: translateX(-100%); opacity: 0; }
+}
+
+@keyframes slideOutRight {
+    0% { transform: translateX(0); opacity: 1; }
+    100% { transform: translateX(100%); opacity: 0; }
+}
+
+@keyframes slideInLeft {
+    0% { transform: translateX(-100%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInRight {
+    0% { transform: translateX(100%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+}
+
+/* Ajustar posiciones de los elementos del reloj */
+.stats-container {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    left: 50%;
+    top: 45%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    z-index: 3;
+}
+
+.money, .health, .stars {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    z-index: 3;
+    object-fit: contain;
+}
+
+/* Asegurarnos que las imágenes dentro de los stats sean visibles */
+.stat img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Eliminar solo las animaciones de cambio de interfaz */
+[data-interface="ryo"] .changing {
+    animation: none;
+}
+
+/* Mantener las demás animaciones para DOPE */
+.changing {
+    animation: fade 0.3s ease-in-out;
+}
+
+/* Ajustes para los contadores en RYO */
+.money-counter, .heart-counter {
+    position: absolute;
+    z-index: 3;
+    color: #2AF780;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.money-counter {
+    top: 35%;
+    left: 20%;
+}
+
+.heart-counter {
+    top: 35%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.stars {
+    position: absolute;
+    top: 35%;
+    right: 20%;
+    width: 48px;
+    height: 48px;
+    z-index: 3;
+}
+
+/* Estilos específicos para el corazón */
+.heart {
+    color: #2AF780;
+    font-size: 1.4rem;
+}
+
+/* Asegurarse que los elementos sean visibles en la interfaz RYO */
+[data-interface="ryo"] .money-counter,
+[data-interface="ryo"] .heart-counter,
+[data-interface="ryo"] .stars {
+    display: flex !important;
+}
+
+/* Contadores y estrellas */
+.heart-counter,
+.money-counter {
+    position: absolute;
+    top: 101px;
+    font-family: 'Perfect DOS VGA 437', monospace;
+    font-size: 20px;
+    color: #192118; /* Color verde oscuro original */
+    z-index: 3;
+    height: 20px;
+    line-height: 20px;
+}
+
+.money-counter {
+    left: 24px;
+    width: 151px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.money-counter span {
+    width: 100%;
+    text-align: center;
+}
+
+.heart-counter {
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.stars {
+    position: absolute;
+    left: 342px;
+    top: 99px;
+    width: auto; /* Eliminar el ancho fijo para mantener proporción original */
+    height: auto; /* Eliminar el alto fijo para mantener proporción original */
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* Asegurar visibilidad en RYO */
+[data-interface="ryo"] .money-counter,
+[data-interface="ryo"] .heart-counter,
+[data-interface="ryo"] .stars {
+    display: block;
+}
+
+/* Ajustes específicos para la interfaz RYO */
+[data-interface="ryo"] .heart,
+[data-interface="ryo"] .count {
+    color: #192118; /* Color verde oscuro original */
+}
+
+.money-counter {
+    position: absolute;
+    top: 101px;
+    left: 24px;
+    width: 151px;
+    text-align: center;
+    font-family: 'Perfect DOS VGA 437', monospace;
+    font-size: 20px;
+    color: #192118;
+    z-index: 3;
+    height: 20px;
+    line-height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.money-counter span {
+    width: 100%;
+    text-align: center;
+}
+
+/* Ajustes para RYO */
+[data-interface="ryo"] .selector-group span {
+    font-size: 30px; /* 50% más grande */
+    text-transform: lowercase;
+}
+
+/* Ajustar flechas verdes solo en RYO */
+[data-interface="ryo"] .arrow {
+    color: #2AF780;
+}
+
+/* Ajustar ancho de botones download en ambas interfaces */
+.download-button {
+    width: fit-content;
+    padding: 0 24px;
+    min-width: auto;
+    max-width: 100%;
+}
+
+/* Asegurarse que el texto del botón mantenga su tamaño */
+.download-button span {
+    white-space: nowrap;
+}
+
+/* Estilos para los selectores en RYO */
+[data-interface="ryo"] .selector-group span {
+    font-family: 'Perfect DOS VGA 437', monospace !important;
+    color: #2AF780;
+    font-size: 30px;
+    text-transform: uppercase;
+    font-weight: normal !important;
+}
+
+/* Asegurarnos que el texto esté en mayúsculas en el HTML */
+[data-interface="ryo"] .selector-group span::first-letter {
+    text-transform: uppercase;
+}
+
+/* Contenedor de flechas */
+[data-interface="ryo"] .selector-group .arrows {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+/* Ajustes para los grupos de selectores en RYO */
+[data-interface="ryo"] .selector-group {
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Media queries */
+@media (max-width: 992px) {
+    .download-button,
+    [data-interface="ryo"] .download-button,
+    [data-interface="ryo"] .selector-group {
+        width: 200px;
+    }
+}
+
+@media (max-width: 576px) {
+    .download-button,
+    [data-interface="ryo"] .download-button,
+    [data-interface="ryo"] .selector-group {
+        width: 200px;
+    }
+}
+
+/* Selectores en DOPE */
+[data-interface="dope"] .selector-group {
+    width: 220px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Texto dentro de los selectores DOPE */
+[data-interface="dope"] .selector-group span {
+    flex: 1;
+    text-align: center;
+    margin: 0 10px;
+}
+
+/* Botón de descarga para DOPE */
+[data-interface="dope"] .download-button {
+    width: 220px !important;
+}
+
+/* Media queries */
+@media (max-width: 992px) {
+    [data-interface="dope"] .download-button,
+    [data-interface="dope"] .selector-group {
+        width: 220px;
+    }
+}
+
+@media (max-width: 576px) {
+    [data-interface="dope"] .download-button,
+    [data-interface="dope"] .selector-group {
+        width: 220px;
+    }
+}

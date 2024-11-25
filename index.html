@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dope Face Creator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="main-container">
+        <!-- Título con nuevo wrapper -->
+        <div class="title-container">
+            <h1 class="title" id="interface-title">DOPE<br>FACE<br>CREATOR</h1>
+        </div>
+
+        <!-- Contenedor central con nuevo wrapper para mantener ratio -->
+        <div class="center-container">
+            <div class="watch-wrapper">
+                <img src="assets/dope/watch_base.png" class="watch-base" alt="Watch Base">
+                <div class="container" id="image-container">
+                    <img src="assets/dope/imagen-base.png" class="imagen-base" alt="Imagen Base" />
+                    <div id="money-counter" class="money-counter" style="display: none;">
+                        <span>$4,269,420</span>
+                    </div>
+                    <div id="heart-counter" class="heart-counter" style="display: none;">
+                        <span class="heart">♥</span>
+                        <span class="count">100</span>
+                    </div>
+                    <img id="stars" class="stars" src="assets/ryo/stars_1.png" alt="Stars" style="display: none;" />
+                    <img id="vehiculo" src="assets/dope/vehiculo1.png" class="vehiculo" alt="Vehículo" />
+                    <img id="hustler" src="assets/dope/hustler1.png" class="hustler" alt="Hustler" />
+                    <div id="clock" class="clock"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controles DOPE -->
+        <div class="controls-container" id="dope-controls">
+            <nav class="selector-groups">
+                <div class="selector-group">
+                    <button class="arrow" onclick="cambiarHustler(-1)">◀</button>
+                    <span>Hustler</span>
+                    <button class="arrow" onclick="cambiarHustler(1)">▶</button>
+                </div>
+
+                <div class="selector-group">
+                    <button class="arrow" onclick="cambiarVehiculo(-1)">◀</button>
+                    <span>Vehicle</span>
+                    <button class="arrow" onclick="cambiarVehiculo(1)">▶</button>
+                </div>
+            </nav>
+            
+            <button id="download-btn" class="download-button" onclick="descargarImagen()">Download</button>
+        </div>
+
+        <!-- Controles RYO -->
+        <div class="controls-container" id="ryo-controls" style="display: none;">
+            <nav class="selector-groups">
+                <div class="selector-group">
+                    <button class="arrow" onclick="cambiarBaseRyo(-1)">◀</button>
+                    <span>DESIGN</span>
+                    <button class="arrow" onclick="cambiarBaseRyo(1)">▶</button>
+                </div>
+
+                <div class="selector-group">
+                    <button class="arrow" onclick="cambiarStars(-1)">◀</button>
+                    <span>STARS</span>
+                    <button class="arrow" onclick="cambiarStars(1)">▶</button>
+                </div>
+            </nav>
+            
+            <button id="download-btn-ryo" class="download-button" onclick="descargarImagen()">DOWNLOAD</button>
+        </div>
+    </div>
+
+    <!-- Navegación de interfaces -->
+    <nav class="interface-dots" role="navigation" aria-label="Cambiar interfaz">
+        <button class="dot active" onclick="cambiarInterfaz('dope')" aria-label="DOPE interface"></button>
+        <button class="dot" onclick="cambiarInterfaz('ryo')" aria-label="RYO interface"></button>
+    </nav>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
