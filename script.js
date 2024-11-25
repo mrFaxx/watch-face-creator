@@ -2,7 +2,6 @@
 let resizeTimeout = null;
 let vehiculoTimeouts = [];
 
-
 // Estado global de la aplicación
 const state = {
     currentInterface: 'dope',
@@ -26,7 +25,7 @@ const CONFIG = {
             fileName: 'dope-face.png'
         },
         ryo: {
-            title: 'DOPE WARS\nFace\nCreator',
+            title: 'DOPEWARS\nFACE\nCREATOR',
             watchBase: './assets/ryo/watch_base_green.png',
             fileName: 'ryo-face.png'
         }
@@ -197,11 +196,10 @@ function updateDimensions() {
         container.style.transform = `scale(${scale})`;
     }
     
-    // Actualizar tamaño del reloj manteniendo la proporción original
+    // Actualizar tamaño del reloj
     if (elements.clock) {
-        const originalFontSize = 160; // Tamaño original de la fuente
-        elements.clock.style.fontSize = `${originalFontSize}px`;
-        // No aplicamos escala adicional, ya que el contenedor padre ya está escalado
+        const fontSize = Math.min(160 * scale, 160);
+        elements.clock.style.fontSize = `${fontSize}px`;
     }
     
     // Actualizar título según el tamaño de pantalla
@@ -275,8 +273,7 @@ function cambiarInterfaz(tipo) {
         if (elements.title) {
             elements.title.style.fontFamily = 'PPMondwest';
             elements.title.style.color = '#2AF780';
-            elements.title.style.fontWeight = 'normal';
-            elements.title.innerHTML = isSmallScreen ? 'DOPE WARS Face Creator' : CONFIG.interfaces[tipo].title.replace(/\n/g, '<br>');
+            elements.title.innerHTML = isSmallScreen ? 'DOPEWARS FACE CREATOR' : CONFIG.interfaces[tipo].title.replace(/\n/g, '<br>');
         }
         
         // Mostrar/ocultar elementos
@@ -404,75 +401,41 @@ document.addEventListener('DOMContentLoaded', async () => {
     initializeElements();
     
     try {
-        // Inicializar imágenes y elementos base
-        await initializeImages();
+        // Establecer imagen base inicial
+        if (elements.watchBase) {
+            elements.watchBase.src = CONFIG.interfaces.dope.watchBase;
+        }
         
-        // Inicializar UI y actualizaciones
-        initializeUI();
+        // Detectar imágenes disponibles
+        console.log('Detectando imágenes disponibles...');
+        hustlers = await detectarImagenesDisponibles('hustler', 'hustler');
+        vehiculos = await detectarImagenesDisponibles('vehiculo', 'vehiculo');
+        ryoBaseImages = await detectarImagenesDisponibles('ryo', 'img_base_');
+        starsImages = await detectarImagenesDisponibles('ryo', 'stars_');
         
-        // Inicializar hints y tooltips
-        initializeHints();
+        console.log('Imágenes detectadas:', {
+            hustlers,
+            vehiculos,
+            ryoBaseImages,
+            starsImages
+        });
+        
+        // Establecer imágenes iniciales
+        if (hustlers.length > 0 && elements.hustler) {
+            elements.hustler.src = CONFIG.imagePath.dope + hustlers[0];
+        }
+        
+        if (vehiculos.length > 0 && elements.vehiculo) {
+            elements.vehiculo.src = CONFIG.imagePath.dope + vehiculos[0];
+        }
         
     } catch (error) {
         console.error('Error durante la inicialización:', error);
     }
-});
-
-// Función para inicializar imágenes
-async function initializeImages() {
-    // Establecer imagen base inicial
-    if (elements.watchBase) {
-        elements.watchBase.src = CONFIG.interfaces.dope.watchBase;
-    }
     
-    // Detectar imágenes disponibles
-    console.log('Detectando imágenes disponibles...');
-    hustlers = await detectarImagenesDisponibles('hustler', 'hustler');
-    vehiculos = await detectarImagenesDisponibles('vehiculo', 'vehiculo');
-    ryoBaseImages = await detectarImagenesDisponibles('ryo', 'img_base_');
-    starsImages = await detectarImagenesDisponibles('ryo', 'stars_');
-    
-    console.log('Imágenes detectadas:', { hustlers, vehiculos, ryoBaseImages, starsImages });
-    
-    // Establecer imágenes iniciales
-    if (hustlers.length > 0 && elements.hustler) {
-        elements.hustler.src = CONFIG.imagePath.dope + hustlers[0];
-    }
-    
-    if (vehiculos.length > 0 && elements.vehiculo) {
-        elements.vehiculo.src = CONFIG.imagePath.dope + vehiculos[0];
-    }
-}
-
-// Función para inicializar UI
-function initializeUI() {
     // Inicializar dimensiones y reloj
     updateDimensions();
     updateClock();
     setInterval(updateClock, 60000);
-    
-    // Asegurarnos de que el body tenga el data-interface correcto al cargar
-    document.body.setAttribute('data-interface', state.currentInterface);
-}
+});
 
-// Función para inicializar hints
-function initializeHints() {
-    const dotsContainer = document.querySelector('.interface-dots');
-    const hint = document.createElement('div');
-    hint.className = 'dots-hint';
-    hint.textContent = 'Switch between interfaces!';
-    dotsContainer.appendChild(hint);
-
-    function showDotsHint() {
-        hint.style.animation = 'showHint 4s ease-in-out';
-        hint.addEventListener('animationend', () => {
-            hint.style.animation = '';
-        }, { once: true });
-    }
-
-    // Mostrar el hint inicial después de 2 segundos
-    setTimeout(showDotsHint, 2000);
-    
-    // Repetir cada 30 segundos
-    setInterval(showDotsHint, 30000);
-}

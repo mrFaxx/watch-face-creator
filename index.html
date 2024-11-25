@@ -38,15 +38,15 @@
         <div class="controls-container" id="dope-controls">
             <nav class="selector-groups">
                 <div class="selector-group">
-                    <button class="arrow" data-tooltip="← → Change design | SHIFT + ← → Change vehicle" onclick="cambiarHustler(-1)">◀</button>
+                    <button class="arrow" onclick="cambiarHustler(-1)">◀</button>
                     <span>Hustler</span>
-                    <button class="arrow" data-tooltip="← → Change design | SHIFT + ← → Change vehicle" onclick="cambiarHustler(1)">▶</button>
+                    <button class="arrow" onclick="cambiarHustler(1)">▶</button>
                 </div>
 
                 <div class="selector-group">
-                    <button class="arrow" data-tooltip="← → Change design | SHIFT + ← → Change vehicle" onclick="cambiarVehiculo(-1)">◀</button>
+                    <button class="arrow" onclick="cambiarVehiculo(-1)">◀</button>
                     <span>Vehicle</span>
-                    <button class="arrow" data-tooltip="← → Change design | SHIFT + ← → Change vehicle" onclick="cambiarVehiculo(1)">▶</button>
+                    <button class="arrow" onclick="cambiarVehiculo(1)">▶</button>
                 </div>
             </nav>
             
@@ -57,19 +57,19 @@
         <div class="controls-container" id="ryo-controls" style="display: none;">
             <nav class="selector-groups">
                 <div class="selector-group">
-                    <button class="arrow" data-tooltip="← → Change design | ↑ ↓ Change stars" onclick="cambiarBaseRyo(-1)">◀</button>
-                    <span>DESIGN</span>
-                    <button class="arrow" data-tooltip="← → Change design | ↑ ↓ Change stars" onclick="cambiarBaseRyo(1)">▶</button>
+                    <button class="arrow" onclick="cambiarBaseRyo(-1)">◀</button>
+                    <span>Design</span>
+                    <button class="arrow" onclick="cambiarBaseRyo(1)">▶</button>
                 </div>
 
                 <div class="selector-group">
-                    <button class="arrow" data-tooltip="← → Change design | ↑ ↓ Change stars" onclick="cambiarStars(-1)">◀</button>
-                    <span>STARS</span>
-                    <button class="arrow" data-tooltip="← → Change design | ↑ ↓ Change stars" onclick="cambiarStars(1)">▶</button>
+                    <button class="arrow" onclick="cambiarStars(-1)">◀</button>
+                    <span>Stars</span>
+                    <button class="arrow" onclick="cambiarStars(1)">▶</button>
                 </div>
             </nav>
             
-            <button id="download-btn-ryo" class="download-button" onclick="descargarImagen()">DOWNLOAD</button>
+            <button id="download-btn-ryo" class="download-button" onclick="descargarImagen()">Download</button>
         </div>
     </div>
 

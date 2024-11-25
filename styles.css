@@ -10,10 +10,8 @@
 }
 
 @font-face {
-    font-family: 'Perfect DOS VGA 437';
-    src: url('../fonts/Perfect-DOS-VGA-437.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+    font-family: 'Perfect-DOS-VGA-437';
+    src: url('./fonts/Perfect-DOS-VGA-437.ttf') format('truetype');
 }
 
 @font-face {
@@ -174,12 +172,12 @@ body {
     opacity: 0.8;
 }
 
-/* Estilos base del botón de descarga */
+/* Botón de descarga */
 .download-button {
     position: relative;
     z-index: 20;
     margin-top: 3rem;
-    padding: 1rem 2rem;
+    padding: 1rem;
     background-color: white;
     color: black;
     border: none;
@@ -187,12 +185,12 @@ body {
     font-family: 'Dope Display', monospace;
     font-size: 16px;
     cursor: pointer;
+    min-width: 220px;
     height: 52px;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: background-color 0.2s ease;
-    width: 220px;
 }
 
 .download-button:hover {
@@ -202,19 +200,6 @@ body {
 .download-button:disabled {
     opacity: 0.8;
     cursor: not-allowed;
-}
-
-/* Estilos específicos para cada interfaz */
-[data-interface="dope"] .download-button {
-    width: 220px;
-}
-
-[data-interface="ryo"] .download-button {
-    width: 200px;
-    font-family: 'Perfect DOS VGA 437', monospace;
-    font-size: 25px;
-    background-color: #2AF780;
-    color: #192118;
 }
 
 /* Elementos específicos */
@@ -351,21 +336,19 @@ body {
     }
     
     .selector-group {
-        width: 200px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        width: 100%;
+        justify-content: center;
     }
     
     .selector-group span {
         font-size: 18px;
         min-width: 80px;
         text-align: center;
-        flex: 1;
-        text-align: left;
     }
     
     .download-button {
+        width: 100%;
+        max-width: 300px;
         margin-top: 1rem;
     }
     
@@ -393,6 +376,7 @@ body {
     }
     
     .download-button {
+        min-width: 180px;
         font-size: 14px;
     }
     
@@ -405,28 +389,16 @@ body {
 [data-interface="ryo"] .title {
     font-family: 'PPMondwest', sans-serif;
     color: #2AF780;
-    font-weight: normal;
 }
 
 [data-interface="ryo"] .selector-group span {
-    font-family: 'Perfect DOS VGA 437', monospace !important;
+    font-family: 'PPMondwest', sans-serif;
     color: #2AF780;
-    font-size: 30px;
-    text-transform: uppercase;
-    font-weight: normal !important;
-    flex: 1;
-    text-align: center;
-    margin: 0 10px;
 }
 
 [data-interface="ryo"] .download-button {
-    font-family: 'Perfect DOS VGA 437', monospace !important;
-    font-size: 25px;
-    font-weight: normal !important;
     background-color: #2AF780;
     color: #192118;
-    text-transform: uppercase;
-    width: 200px;
 }
 
 [data-interface="ryo"] .download-button:hover {
@@ -669,175 +641,4 @@ body {
 .money-counter span {
     width: 100%;
     text-align: center;
-}
-
-/* Ajustes para RYO */
-[data-interface="ryo"] .selector-group span {
-    font-size: 30px; /* 50% más grande */
-    text-transform: lowercase;
-}
-
-/* Ajustar flechas verdes solo en RYO */
-[data-interface="ryo"] .arrow {
-    color: #2AF780;
-}
-
-/* Ajustar ancho de botones download en ambas interfaces */
-.download-button {
-    width: fit-content;
-    padding: 0 24px;
-    min-width: auto;
-    max-width: 100%;
-}
-
-/* Asegurarse que el texto del botón mantenga su tamaño */
-.download-button span {
-    white-space: nowrap;
-}
-
-/* Estilos para los selectores en RYO */
-[data-interface="ryo"] .selector-group span {
-    font-family: 'Perfect DOS VGA 437', monospace !important;
-    color: #2AF780;
-    font-size: 30px;
-    text-transform: uppercase;
-    font-weight: normal !important;
-}
-
-/* Asegurarnos que el texto esté en mayúsculas en el HTML */
-[data-interface="ryo"] .selector-group span::first-letter {
-    text-transform: uppercase;
-}
-
-/* Contenedor de flechas */
-[data-interface="ryo"] .selector-group .arrows {
-    display: flex;
-    gap: 10px;
-    flex-shrink: 0;
-}
-
-/* Ajustes para los grupos de selectores en RYO */
-[data-interface="ryo"] .selector-group {
-    width: 200px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-/* Media queries */
-@media (max-width: 992px) {
-    .download-button,
-    [data-interface="ryo"] .download-button,
-    [data-interface="ryo"] .selector-group {
-        width: 200px;
-    }
-}
-
-@media (max-width: 576px) {
-    .download-button,
-    [data-interface="ryo"] .download-button,
-    [data-interface="ryo"] .selector-group {
-        width: 200px;
-    }
-}
-
-/* Selectores en DOPE */
-[data-interface="dope"] .selector-group {
-    width: 220px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-/* Texto dentro de los selectores DOPE */
-[data-interface="dope"] .selector-group span {
-    flex: 1;
-    text-align: center;
-    margin: 0 10px;
-}
-
-/* Botón de descarga para DOPE */
-[data-interface="dope"] .download-button {
-    width: 220px !important;
-}
-
-/* Media queries */
-@media (max-width: 992px) {
-    [data-interface="dope"] .download-button,
-    [data-interface="dope"] .selector-group {
-        width: 220px;
-    }
-}
-
-@media (max-width: 576px) {
-    [data-interface="dope"] .download-button,
-    [data-interface="dope"] .selector-group {
-        width: 220px;
-    }
-}
-
-/* Tooltips para las flechas */
-.arrow::before {
-    content: attr(data-tooltip);
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 8px 12px;
-    background-color: rgba(0, 0, 0, 0.9);
-    color: #00ff00;
-    border-radius: 4px;
-    font-size: 12px;
-    white-space: nowrap;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s, visibility 0.3s;
-    font-family: 'Consolas', 'Monaco', monospace;
-    z-index: 1000;
-    border: 1px solid #333;
-}
-
-/* Hint para los puntitos */
-.dots-hint {
-    position: absolute;
-    bottom: 150%;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.9);
-    color: #00ff00;
-    padding: 8px 12px;
-    border-radius: 4px;
-    font-size: 12px;
-    white-space: nowrap;
-    text-align: center;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s, visibility 0.3s;
-    font-family: 'Consolas', 'Monaco', monospace;
-    z-index: 1000;
-    border: 1px solid #333;
-}
-
-/* Mostrar tooltips al hacer hover */
-.arrow:hover::before {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* Mostrar hint de los puntitos */
-.dots-hint.show {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* Animación para el hint de los puntitos */
-@keyframes showHint {
-    0% { opacity: 0; visibility: hidden; }
-    20% { opacity: 1; visibility: visible; }
-    80% { opacity: 1; visibility: visible; }
-    100% { opacity: 0; visibility: hidden; }
-}
-
-.dots-hint.animate {
-    animation: showHint 4s ease-in-out;
 }
